@@ -110,6 +110,3 @@ Environment variables (set in `.env` file):
     └── index.html        # Main HTML template
 ```
 
-## License
-
-MIT
