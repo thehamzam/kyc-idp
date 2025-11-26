@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYC Intelligent Document Extraction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>📄 KYC Intelligent Document Extraction</h1>
+                <div class="user-info">
+                    <span>Welcome, {{ username }}</span>
+                    <a href="{{ url_for('auth.logout') }}" class="btn-logout">Sign Out</a>
+                </div>
+            </div>
+            <p class="subtitle">Upload a license or passport image to extract personal information</p>
+        </header>
+
+        <!-- Error message area -->
+        <div id="error-message" class="error-message" style="display: none;"></div>
+
+        <!-- Upload section -->
+        <div id="upload-section" class="upload-section">
+            <form id="upload-form" enctype="multipart/form-data">
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-icon">📁</div>
+                    <p>Drag and drop images here, or click to select</p>
+                    <p class="file-types">Supported formats: JPEG, PNG, GIF (multiple files supported)</p>
+                    <input type="file" id="file-input" name="files[]" accept="image/*" multiple hidden>
+                </div>
+                <div id="file-list" class="file-list" style="display: none;">
+                    <div id="file-list-items"></div>
+                    <button type="button" id="clear-all-files" class="btn-clear-all">Clear All</button>
+                </div>
+                <button type="submit" id="upload-btn" class="btn-primary" disabled>
+                    Extract Information
+                </button>
+            </form>
+        </div>
+
+        <!-- Loading indicator -->
+        <div id="loading-section" class="loading-section" style="display: none;">
+            <div class="spinner"></div>
+            <p>Analyzing document...</p>
+        </div>
+
+        <!-- Results section -->
+        <div id="results-section" class="results-section" style="display: none;">
+            <h2>Extraction Results</h2>
+            <div class="results-container">
+                <div class="image-panel">
+                    <h3>Uploaded Document</h3>
+                    <img id="result-image" src="" alt="Uploaded document">
+                </div>
+                <div class="data-panel">
+                    <h3>Extracted Information</h3>
+                    <div id="extracted-data"></div>
+                </div>
+            </div>
+            <button id="upload-another" class="btn-secondary">
+                Upload Another Document
+            </button>
+        </div>
+
+        <!-- Submission History Section -->
+        <div id="history-section" class="history-section">
+            <h2>📋 Submission History</h2>
+            <div id="history-empty" class="history-empty" style="display: none;">
+                <p>No submissions yet. Upload a document to get started.</p>
+            </div>
+            <div id="history-table-container" style="display: none;">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Document Type</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Submission Details Modal -->
+        <div id="details-modal" class="modal" style="display: none;">
+            <div class="modal-content modal-content-wide">
+                <div class="modal-header">
+                    <h3>Submission Details</h3>
+                    <button id="close-modal" class="btn-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-meta" class="modal-meta"></div>
+                    <div class="modal-details-container">
+                        <div id="modal-image-panel" class="modal-image-panel">
+                            <h4>Document Image</h4>
+                            <img id="modal-image" src="" alt="Document image">
+                        </div>
+                        <div id="modal-data" class="modal-data-panel"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

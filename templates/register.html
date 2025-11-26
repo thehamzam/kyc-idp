@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - KYC Document Extraction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📄 KYC Document Extraction</h1>
+            <p class="subtitle">Create an account to get started</p>
+        </header>
+
+        <div class="auth-section">
+            <h2>Create Account</h2>
+            
+            {% if error %}
+            <div class="error-message" style="display: block;">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" class="auth-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="6">
+                    <small>Must be at least 6 characters</small>
+                </div>
+                <button type="submit" class="btn-primary">Create Account</button>
+            </form>
+
+            <p class="auth-link">
+                Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
